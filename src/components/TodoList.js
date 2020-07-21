@@ -11,12 +11,12 @@ const TodoList = () => {
     state.todos.length > 0 ? `${state.todos.length} Todos` : 'Nothing to do!';
   return (
     <div className="container mx-auto max-w-md text-center font-mono">
-      <h1 className="text-purple">{title}</h1>
+      <h1 className="text-blue">{title}</h1>
       <ul className="list-reset text-white p-0">
         {state.todos.map((todo) => (
           <li
             key={todo.id}
-            className="flex items-center bg-purple border-black border border-2 my-2 py-4 shadow-lg rounded"
+            className="flex items-center bg-blue border-black border border-2 my-2 py-4 shadow-lg rounded"
           >
             <span
               onDoubleClick={() => {
@@ -39,7 +39,7 @@ const TodoList = () => {
                 dispatch({ type: 'SET_CURRENT_TODO', payload: todo })
               }
             >
-              <Icon size={32} style={{ color: 'green' }} icon={ic_mode_edit} />
+              <Icon size={32} style={{ color: 'yellow' }} icon={ic_mode_edit} />
             </button>
             <button
               onClick={() => {

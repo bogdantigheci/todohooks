@@ -34,7 +34,7 @@ const App = () => {
     <TodosContext.Provider value={{ state, dispatch }}>
       <div
         style={{ minHeight: '100vh' }}
-        className="container-fluid mx-auto p-4 bg-purple-lighter  shadow-lg rounded"
+        className="container-fluid mx-auto p-4 bg-blue-lighter  shadow-lg rounded"
       >
         <AddTodo />
         <TodoList />

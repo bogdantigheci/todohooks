@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const AddTodo = () => {
   const [todo, setTodo] = useState('');
+  const [error, setError] = useState(null);
   const {
     state: { currentTodo = {} },
     dispatch,
@@ -24,30 +25,36 @@ const AddTodo = () => {
         })
         .then((res) => dispatch({ type: 'UPDATE_TODO', payload: res.data }));
     } else {
-      axios
-        .post('https://todohooksapi.vercel.app/todos/', {
-          id: uuidv4(),
-          text: todo,
-          complete: false,
-        })
-        .then((res) => {
-          console.log('reeeeeeeees', res.data);
-          dispatch({ type: 'ADD_TODO', payload: res.data });
-        });
+      if (!todo) {
+        return setError('You cannot add an empty todo!');
+      } else {
+        axios
+          .post('https://todohooksapi.vercel.app/todos/', {
+            id: uuidv4(),
+            text: todo,
+            complete: false,
+          })
+          .then((res) => {
+            dispatch({ type: 'ADD_TODO', payload: res.data });
+          });
+      }
     }
     setTodo('');
+    setError(null);
   };
+
   return (
     <React.Fragment>
       <form className="flex justify-center p-5" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Add new todo..."
-          className="border-black border-solid border-2 p-2 rounded"
+          className="border-blue border-solid border-2 p-2 rounded text-blue"
           onChange={(e) => setTodo(e.target.value)}
           value={todo}
         />
       </form>
+      {error ? <div className="text-center text-red">{error}</div> : ''}
     </React.Fragment>
   );
 };
